@@ -1,7 +1,22 @@
-import React from "react";
-import styles from "./SingleApplication.module.css";
+import { TApplication } from '../json-server/db'
+import styles from './SingleApplication.module.css'
 
-const SingleApplication = ({ application }) => {
+const SingleApplication = ({ application }: { application: TApplication }) => {
+  const formatCurrency = (amount) =>
+    new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP',
+      minimumFractionDigits: 0,
+    }).format(amount)
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}-${month}-${year}`
+  }
+
   return (
     <div className={styles.SingleApplication}>
       <div className={styles.cell}>
@@ -12,24 +27,24 @@ const SingleApplication = ({ application }) => {
         <sub>Name</sub>
         {application.first_name} {application.last_name}
       </div>
-      <div className={styles.cell}>
+      <div className={`${styles.cell} ${styles.email}`}>
         <sub>Email</sub>
-        {application.email}
+        <a href={`mailto:${application.email}`}>{application.email}</a>
       </div>
       <div className={styles.cell}>
         <sub>Loan Amount</sub>
-        {application.loan_amount}
+        {formatCurrency(application.loan_amount)}
       </div>
       <div className={styles.cell}>
         <sub>Application Date</sub>
-        {application.date_created}
+        {formatDate(application.date_created)}
       </div>
       <div className={styles.cell}>
         <sub>Expiry date</sub>
-        {application.expiry_date}
+        {formatDate(application.expiry_date)}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SingleApplication;
+export default SingleApplication

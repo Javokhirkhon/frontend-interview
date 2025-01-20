@@ -1,5 +1,15 @@
 .Applications {
   width: 100%;
   max-width: 1200px;
+  text-align: center;
   margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 4rem;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin: 10px 0;
 }

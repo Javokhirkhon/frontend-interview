@@ -13,7 +13,7 @@ const LOAN_TYPES = [
 
 type TLoanType = (typeof LOAN_TYPES)[number];
 
-type TApplication = {
+export type TApplication = {
   id: number;
   first_name: string;
   last_name: string;
